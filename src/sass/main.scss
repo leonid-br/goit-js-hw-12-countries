@@ -5,6 +5,9 @@
 
 // Стили для файла с примером HTML-фрагмента
 @import './input';
+body{
+    background-color: cadetblue;
+}
 ul{
     list-style: none;
 }
@@ -33,4 +36,17 @@ img{
     width: 250px;
     margin-left: -15px;
     margin-top: 20px;
+    
 }
+
+.country{
+    font-size: 20px;
+    list-style:disc;
+    font-style: italic;
+   
+}
+.min-flag{
+    margin-top: 0;
+    width: 25px;
+    height: 100%;
+   margin-left: 15px;}
