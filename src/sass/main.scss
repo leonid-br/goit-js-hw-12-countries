@@ -1,0 +1,36 @@
+/*
+ * Главный файл стилей.
+ * Все паршалы подключаются сюда.
+ */
+
+// Стили для файла с примером HTML-фрагмента
+@import './input';
+ul{
+    list-style: none;
+}
+.country-name{
+    margin-left: -15px;
+font-size: 36px;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.country-params{
+    margin-left: -15px;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.country-params span{
+    font-weight: bold;
+}
+
+.lang{
+    list-style: disc;
+}
+
+img{
+    width: 250px;
+    margin-left: -15px;
+    margin-top: 20px;
+}

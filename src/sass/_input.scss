@@ -1,0 +1,21 @@
+h1{
+margin-bottom: 10px;
+font-size: 26px;
+margin-left: 3px;
+}
+
+input{
+
+      margin-left: 10px;
+      margin-top: 10px;
+      border: 1px solid black;
+      border-radius: 4px;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 20px;
+
+
+      &:hover, 
+      &:focus,
+      &:active{ border: 1px solid blue;}
+    }
