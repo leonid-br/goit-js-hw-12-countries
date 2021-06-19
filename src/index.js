@@ -1,66 +1,64 @@
 import './sass/main.scss';
+
+// Import Function
 import fetchCountries from './js/fetchCountries';
+
+// Import Debounce
 import debounce from 'lodash.debounce';
-import countrysMarcup from './templates/countrys.hbs';
-import countryMarcup from './templates/country.hbs';
-import "@pnotify/core/dist/BrightTheme.css";
-import "@pnotify/core/dist/Material.css";
-import { alert, error, defaultModules } from "@pnotify/core/dist/PNotify.js";
-  
-const refs = {
-    inputEl:document.querySelector('#js-input'),
-    countrysMarcupEL: document.querySelector('.js-countrys-list')
-}
-refs.inputEl.addEventListener('input', debounce(onSearch,500))
+
+// Import Tamplates
+import countrysMarcup from './templates/countrys';
+import countryMarcup from './templates/country';
+
+// Import Notification
+import "@pnotify/core/dist/BrightTheme";
+import "@pnotify/core/dist/Material";
+import { alert, error, defaultModules } from "@pnotify/core/dist/PNotify";
+// import * as PNotify from "@pnotify/core/dist/PNotify";
+
+// Import Variables
+import refs from './js/refs'
+
+// Event Handlers
+refs.inputEl.addEventListener('input', debounce(onSearch,1000))
 
 
-
-
+// Functions
 function onSearch(e) {
-  const country = refs.inputEl.value;
+  const country = refs.inputEl.value.trim();
   e.preventDefault();
   
   fetchCountries(country)
   .then(country=>{
-    const tmp1 = countryMarcup(country);
     refs.countrysMarcupEL.innerHTML=''
-
-    if (country.length===1){           
-    refs.countrysMarcupEL.insertAdjacentHTML('beforeend', tmp1)
-    return}
-    if (country.length>10){alert('введи еще буковок');}
-    if (country.length<=10){ 
-         const tmp = countrysMarcup(country)
-         refs.countrysMarcupEL.insertAdjacentHTML('beforeend',tmp)   
-        }  
+    searchCountry(country)
   })
+}
 
+function searchCountry(country) {
+  const marcupCountry = countryMarcup(country);
+  const marcupCountrys = countrysMarcup(country)
+
+  if (country.length===1){           
+    refs.countrysMarcupEL.insertAdjacentHTML('beforeend', marcupCountry)
+    return}
+  if (country.length>10){alert({
+    title: 'Notification',
+    text: 'Enter more letters',
+    delay: 2
+  });}
+  if (country.length<=10){ 
+    refs.countrysMarcupEL.insertAdjacentHTML('beforeend',marcupCountrys)   
+        }
+  if (refs.inputEl.value!==''&& country.length===0){error({
+    title: 'Oh No!',
+    text: 'This country does not exist',
+    delay: 2
+  })
+    ;} 
 }
 
 
-// refs.inputEl.addEventListener('input', debounce((()=>{
-
-//     fetch(`https://restcountries.eu/rest/v2/name/${refs.inputEl.value}`)
-//     .then(r => r.json())
-//     .then(arr => {
-//       refs.countrysMarcupEL.innerHTML='';
-//           if (arr.length===1){
-//             const tmp1 = countryMarcup(arr);
-//             refs.countrysMarcupEL.insertAdjacentHTML('beforeend', tmp1)
-//             return}
-//             if (arr.length>10){alert('введи еще буковок');}
-//             if (arr.length<=10){ 
-//                 const tmp = countrysMarcup(arr)
-//                 refs.countrysMarcupEL.insertAdjacentHTML('beforeend',tmp)            
-//               }  
-           
-//     }
-//       )
-//     .catch(err=>{
-//         console.log(err);
-//         alert('Такой страны нет')})
-    
-// }),1000))
 
 
 
